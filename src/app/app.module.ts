@@ -1,16 +1,30 @@
-import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core'
-import { NativeScriptModule } from '@nativescript/angular'
+import {
+  NgModule,
+  NO_ERRORS_SCHEMA,
+  NgModuleFactoryLoader,
+} from '@angular/core';
+// import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
+// import { NSModuleFactoryLoader } from 'nativescript-angular/router';
 
-import { AppRoutingModule } from './app-routing.module'
-import { AppComponent } from './app.component'
-import { ItemsComponent } from './item/items.component'
-import { ItemDetailComponent } from './item/item-detail.component'
+import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
+
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { NativeScriptModule } from '@nativescript/angular';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
+  declarations: [AppComponent],
   bootstrap: [AppComponent],
-  imports: [NativeScriptModule, AppRoutingModule],
-  declarations: [AppComponent, ItemsComponent, ItemDetailComponent],
-  providers: [],
+  imports: [
+    NativeScriptModule,
+    AppRoutingModule,
+    CoreModule.forRoot(),
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+  ],
+
   schemas: [NO_ERRORS_SCHEMA],
 })
 export class AppModule {}
