@@ -1,0 +1,14 @@
+<ListView [items]="items" separatorColor="black" 
+(loadMoreItems)="onLoadMoreItems.emit($event)">
+    <ng-template let-item="item">
+      <StackLayout [nsRouterLink]="['/item', item.id]" orientation="horizontal">
+        <Label width="34%" col="0" [text]="item.name"></Label>
+        <Label width="33%" col="1" [text]="item.current_price + ' $'"></Label>
+        <Label
+          width="33%"
+          col="2"
+          [text]="item.price_change_percentage_24h + ' %'"
+        ></Label>
+      </StackLayout>
+    </ng-template>
+  </ListView>

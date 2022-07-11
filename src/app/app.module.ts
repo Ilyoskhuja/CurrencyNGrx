@@ -1,10 +1,7 @@
 import {
   NgModule,
   NO_ERRORS_SCHEMA,
-  NgModuleFactoryLoader,
 } from '@angular/core';
-// import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
-// import { NSModuleFactoryLoader } from 'nativescript-angular/router';
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';

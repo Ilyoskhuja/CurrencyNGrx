@@ -25,7 +25,10 @@ import {
     getCurrencyState,
     fromCurrency.getCurrencies,
   );
-  
+  export const searchCurrencies = createSelector(
+    getCurrencyState,
+    fromCurrency.searchCurrencies,
+  );
   export const getCurrenciesLoading = createSelector(
     getCurrencyState,
     fromCurrency.getCurrenciesLoading,

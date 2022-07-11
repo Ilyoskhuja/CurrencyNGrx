@@ -2,13 +2,9 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-
-// import { reducers } from './reducers';
-// import { CurrencyEffects } from './effects';
+import {COIN_COMPONENTS} from './component'
 
 import { CurrencyRoutingModule } from './currency.routing';
-import { ItemsComponent } from './component/items.component';
-import { ItemDetailComponent } from './component/item-detail.component';
 import { NativeScriptCommonModule } from '@nativescript/angular';
 import { CurrencyEffects } from './effects';
 import { reducers } from './reducer';
@@ -20,7 +16,7 @@ import { reducers } from './reducer';
     StoreModule.forFeature('currency', reducers),
     EffectsModule.forFeature([CurrencyEffects]),
   ],
-  declarations: [ItemsComponent, ItemDetailComponent],
+  declarations: [...COIN_COMPONENTS],
   schemas: [NO_ERRORS_SCHEMA],
 })
 export class CurrencyModule {}

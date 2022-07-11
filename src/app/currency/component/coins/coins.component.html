@@ -1,0 +1,20 @@
+<ActionBar title="Crypto"> </ActionBar>
+<GridLayout rows="auto,auto" columns="*" 
+(loaded)="onSearchBarLoaded($event)">
+  <ActivityIndicator
+    visibility="{{ isActivityVisible ? 'visible' : 'collapsed' }}"
+    [busy]="isBusy"
+    (busyChange)="onBusyChanged($event)"
+  ></ActivityIndicator>
+  <SearchBar
+    width="100%"
+    #sb
+    (loaded)="onSearchBarLoaded($event)"
+    row="0"
+    (textChange)="onTextChanged($event)"
+    (submit)="searchCoin($event)"
+    (clear)="onSearchBarClear($event)"
+    hint="Search coin"
+  ></SearchBar>
+  <coin-list row="1" [items]="currencies$ |async" (itemTap)="coinTap($event)" (onLoadMoreItems)="onLoadMoreCoins($event)"></coin-list>
+</GridLayout>
