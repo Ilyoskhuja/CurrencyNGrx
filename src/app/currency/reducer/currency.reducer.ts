@@ -1,11 +1,11 @@
-import { Currency } from "../models/currency.model";
-import * as currencyActions from "../actions";
+
 import { createReducer, on } from "@ngrx/store";
 import { CoinsActions } from "../actions";
+import { SearchResponceModel,Currency} from "../models";
 
 export interface State {
   loading: boolean;
-  data: any[];
+  data: Currency | SearchResponceModel [];
 }
 
 const initialState: State = {

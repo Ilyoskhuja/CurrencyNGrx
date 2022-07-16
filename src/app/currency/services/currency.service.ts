@@ -1,7 +1,8 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { map, Observable } from "rxjs";
-import { Currency } from "../models/currency.model";
+import { SearchResponceModel,Currency} from "../models";
+
 
 @Injectable()
 export class CurrencyService {
@@ -9,15 +10,15 @@ export class CurrencyService {
 
   constructor(private http: HttpClient) {}
 
-  getCurrencyData(): Observable<Currency[]> {
+  getCurrencyData(): Observable<Currency | SearchResponceModel []> {
     let params = new HttpParams().set("vs_currency", "usd");
 
-    return this.http.get<Currency[]>(`${this.ROOT_URL}/coins/markets`, {
+    return this.http.get<Currency | SearchResponceModel []>(`${this.ROOT_URL}/coins/markets`, {
       params,
     });
   }
   searchCoin(query: string) {
-    return this.http.get<any>(`${this.ROOT_URL}/search?query=${query}`).pipe(
+    return this.http.get<Currency | SearchResponceModel>(`${this.ROOT_URL}/search?query=${query}`).pipe(
       map((r) => {
         return r["coins"];
       })

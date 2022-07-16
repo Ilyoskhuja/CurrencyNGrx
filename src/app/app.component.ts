@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core'
-import { Observable } from 'rxjs';
-import { Currency } from './currency/models/currency.model';
-import { CurrencyService } from './currency/services/currency.service';
+import { Component } from '@angular/core'
+
 
 @Component({
   selector: 'ns-app',

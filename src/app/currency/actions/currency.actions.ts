@@ -1,5 +1,5 @@
 import {  createAction, props } from "@ngrx/store";
-import { Currency } from "../models/currency.model";
+import { Currency, SearchResponceModel } from "../models/";
 
 export const SEARCH = "[Coin] Search";
 export const LOAD_CURRENCY = "[Currency] Load Currency";
@@ -16,7 +16,7 @@ export const CoinsLoaded=createAction(
 // );
 export const LoadCurrencySuccess=createAction(
   LOAD_CURRENCY_SUCCESS,
-  props<{coins:any[]}>()
+  props<{coins:Currency | SearchResponceModel[]}>()
 );
 export const SearchAction = createAction(
   SEARCH,
