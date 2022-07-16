@@ -7,14 +7,15 @@ import {COIN_COMPONENTS} from './component'
 import { CurrencyRoutingModule } from './currency.routing';
 import { NativeScriptCommonModule } from '@nativescript/angular';
 import { CurrencyEffects } from './effects';
-import { reducers } from './reducer';
+import { reducers, SharedStateCoinsModule } from './reducer/state';
 
 @NgModule({
   imports: [
     NativeScriptCommonModule,
     CurrencyRoutingModule,
-    StoreModule.forFeature('currency', reducers),
     EffectsModule.forFeature([CurrencyEffects]),
+    SharedStateCoinsModule
+
   ],
   declarations: [...COIN_COMPONENTS],
   schemas: [NO_ERRORS_SCHEMA],

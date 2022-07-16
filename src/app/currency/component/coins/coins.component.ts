@@ -2,30 +2,30 @@ import { Component, OnInit } from '@angular/core'
 import { ActivityIndicator, EventData, ItemEventData, SearchBar } from '@nativescript/core';
 import { Currency } from '../../models/currency.model';
 import {Store} from '@ngrx/store';
-import { getCurrencies } from '../../reducer/currency.reducer';
-import { search } from '../../actions';
-import { getAllCurrencies } from '../../reducer';
+import { CoinsActions } from '../../actions';
 import { Observable } from 'rxjs';
-
-
+import { getAllCoins } from '../../reducer/state';
+import { debounce } from 'throttle-debounce';
 
 @Component({
   selector: 'ns-coins',
   templateUrl: './coins.component.html',
 })
 export class CoinsComponent implements OnInit {
-  currencies$:Observable<Currency[]>;
+  currencies$:Observable<any[]>;
   isBusy: boolean = true;
   isActivityVisible=true;
   pageNumber=1;
   searchTerm="";
   constructor(private store: Store) {
-   this.currencies$= store.select(getAllCurrencies);
-    console.log("***********currencies$***************",this.currencies$);
+    
+   this.currencies$= store.select(getAllCoins);
+     
     
   }
 
   ngOnInit(): void {
+
   }
   
  
@@ -33,7 +33,6 @@ export class CoinsComponent implements OnInit {
     this.pageNumber++;
   }
   coinTap(coin:Currency){
-   console.log("coin:",coin);
   }
   onSearchLayoutBarLoaded(event){
     if(event.object.android){
@@ -46,6 +45,7 @@ export class CoinsComponent implements OnInit {
       event.object.android.clearFocus();
     }
    
+    this.store.dispatch(CoinsActions.CoinsLoaded())
   }
   searchCoin(args:EventData){
     const sb = args.object as SearchBar
@@ -65,12 +65,19 @@ export class CoinsComponent implements OnInit {
   }
   onBusyChanged(args: EventData) {
       let indicator: ActivityIndicator = <ActivityIndicator>args.object;
-      console.log("indicator.busy changed to: " + indicator.busy);
+  
   }
+  textSearchDebounce = debounce(300, (searchBarArgs) => {
+    const searchBar = <SearchBar>searchBarArgs.object;
+    const searchValue = searchBar.text.toLowerCase();
+  
+    if (searchValue == '') {
+      return [];
+    } else {
+      this.store.dispatch(CoinsActions.SearchAction({searchTerm:searchBar.text}))
+    }
+  });
   onTextChanged(args) {
-    const searchBar = args.object as SearchBar
-    this.store.dispatch(search({searchTerm:searchBar.text}));
-    console.log(`Input changed! New value: ${searchBar.text}`)
-    
+    this.textSearchDebounce(args);
   }
 }

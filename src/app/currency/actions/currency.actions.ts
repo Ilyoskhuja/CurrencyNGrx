@@ -1,33 +1,25 @@
-import { Action, createAction, props } from "@ngrx/store";
+import {  createAction, props } from "@ngrx/store";
 import { Currency } from "../models/currency.model";
 
+export const SEARCH = "[Coin] Search";
 export const LOAD_CURRENCY = "[Currency] Load Currency";
 export const LOAD_CURRENCY_FAIL = "[Currency] Load Currency Failure";
 export const LOAD_CURRENCY_SUCCESS = "[Currency] Load Currency Success";
 
 
-// export class LoadCurrency implements Action {
-//   readonly type = LOAD_CURRENCY;
-// }
-
-// export class LoadCurrencyFail implements Action {
-//   readonly type = LOAD_CURRENCY_FAIL;
-
-//   constructor(public payload: any) {}
-// }
-
-// export class LoadCurrencySuccess implements Action {
-//   readonly type = LOAD_CURRENCY_SUCCESS;
-
-//   constructor(public payload: Currency[]) {}
-// }
-
-
-
-
-export const search = createAction(
-  "[Search Coin] Search",
+export const CoinsLoaded=createAction(
+  LOAD_CURRENCY
+);
+// export const LoadCurrencyFail=createAction(
+//   LOAD_CURRENCY_FAIL,
+//   props<{coin:Currency}>()
+// );
+export const LoadCurrencySuccess=createAction(
+  LOAD_CURRENCY_SUCCESS,
+  props<{coins:any[]}>()
+);
+export const SearchAction = createAction(
+  SEARCH,
   props<{ searchTerm: string }>()
 );
 
-export type Actions = LoadCurrency | LoadCurrencyFail | LoadCurrencySuccess;

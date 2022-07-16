@@ -1,3 +1,4 @@
-export * from './currency.actions';
+import * as CoinsActions from './currency.actions';
 
+export {CoinsActions};
 
